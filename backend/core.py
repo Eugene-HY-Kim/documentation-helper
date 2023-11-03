@@ -1,5 +1,5 @@
 import os
-import typing
+from typing import Any
 
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
@@ -14,7 +14,7 @@ pinecone.init(
     environment=os.environ["PINECONE_ENVIRONMENT_REGION"]
 )
 
-def run_llm(query:str)->typing.Any:
+def run_llm(query:str)->Any:
     embeddings = OpenAIEmbeddings()
     docsearch = Pinecone.from_existing_index(index_name=INDEX_NAME, embedding=embeddings)
     chat = ChatOpenAI(verbose=True, temperature=0)
@@ -25,5 +25,3 @@ def run_llm(query:str)->typing.Any:
 
 if __name__ == "__main__":
     print(run_llm(query="What is RetrievalQA chain?"))
-
-
